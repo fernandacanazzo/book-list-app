@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m231228_145731_create_table_users
+ * Class m231228_145731_create_table_user
  */
-class m231228_145731_create_table_users extends Migration
+class m231228_145731_create_table_user extends Migration
 {
     /**
      * {@inheritdoc}
@@ -13,7 +13,7 @@ class m231228_145731_create_table_users extends Migration
     public function safeUp()
     {
 
-        $this->createTable('users', [
+        $this->createTable('user', [
             'id' => $this->primaryKey(),
             'username' => $this->string(50)->notNull(),
             'password' => $this->string(80)->notNull(),
@@ -28,7 +28,7 @@ class m231228_145731_create_table_users extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('users');
+        $this->dropTable('user');
     }
 
     /*

@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%books}}`.
+ * Handles the creation of table `{{%book}}`.
  */
-class m231228_172256_create_books_table extends Migration
+class m231228_172256_create_table_book extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%books}}', [
+        $this->createTable('{{%book}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string()->notNull(),
             'description' => $this->text()->notNull(),
@@ -27,6 +27,6 @@ class m231228_172256_create_books_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%books}}');
+        $this->dropTable('{{%book}}');
     }
 }
