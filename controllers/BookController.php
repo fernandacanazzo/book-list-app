@@ -10,10 +10,10 @@ use app\models\Book;
 class BookController extends Controller
 {   
 
-    //public $enableCsrfValidation = false;
+    public $enableCsrfValidation = false;
 
     //user has to be authenticated
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'access' => [
@@ -26,7 +26,7 @@ class BookController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     public function actionCreate()
     {
@@ -41,17 +41,19 @@ class BookController extends Controller
         $book->number_of_pages = $request['number_of_pages'];
         $book->date_insert = $request['date_insert'];
 
+        $response = new Response();
+        $response->headers->set('Access-Control-Allow-Headers','content-type');
+        $response->headers->set('Access-Control-Allow-Origin','*');
+
         if($book->validate()){
 
             $book->save();
-
-            $response = new Response();
+           
             $response->data = json_encode(array("message"=>"Book was successfully created."));
             return $response;
 
         }else{
 
-            $response = new Response();
             $response->statusCode = 500;
             $response->data = json_encode(array("message"=>$book->errors));
             return $response;
@@ -68,6 +70,10 @@ class BookController extends Controller
 
         $book = Book::findOne($id);
 
+        $response = new Response();
+        $response->headers->set('Access-Control-Allow-Headers','content-type');
+        $response->headers->set('Access-Control-Allow-Origin','*');
+
         if($book){
 
             $book->title = $request['title'];
@@ -80,13 +86,11 @@ class BookController extends Controller
 
                 $book->save();
 
-                $response = new Response();
                 $response->data = json_encode(array("message"=>"Book was successfully updated."));
                 return $response;
 
             }else{
 
-                $response = new Response();
                 $response->statusCode = 500;
                 $response->data = json_encode(array("message"=>$book->errors));
                 return $response;
@@ -95,7 +99,6 @@ class BookController extends Controller
 
         }else{
 
-            $response = new Response();
             $response->statusCode = 500;
             $response->data = json_encode(array("message"=>"Book #id {$id} doesn't exist."));
             return $response;
@@ -108,15 +111,17 @@ class BookController extends Controller
      
         $book = Book::findOne($id);
 
+        $response = new Response();
+        $response->headers->set('Access-Control-Allow-Headers','content-type');
+        $response->headers->set('Access-Control-Allow-Origin','*');
+
         if($book && $book->delete()){
 
-            $response = new Response();
             $response->data = json_encode(array("message"=>"Book was successfully deleted."));
             return $response;
 
         }else{
 
-            $response = new Response();
             $response->statusCode = 500;
             $response->data = json_encode(array("message"=>"Error on delete action"));
             return $response;
@@ -130,15 +135,17 @@ class BookController extends Controller
      
         $books = Book::find()->asArray()->all();
 
+        $response = new Response();
+        $response->headers->set('Access-Control-Allow-Headers','content-type');
+        $response->headers->set('Access-Control-Allow-Origin','*');
+
         if($books){
 
-            $response = new Response();
             $response->data = json_encode(array("books"=>$books));
             return $response;
 
         }else{
 
-            $response = new Response();
             $response->statusCode = 500;
             $response->data = json_encode(array("message"=>"Book table is empty."));
             return $response;
