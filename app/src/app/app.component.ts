@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Book } from './book';
 import { BooksService } from './services/books.service';
+import { Book } from './interfaces/books.interface';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +11,19 @@ import { BooksService } from './services/books.service';
   providers: [BooksService]
 })
 export class AppComponent implements OnInit{
-  books: any[] = [];
+  books: Book[] = [];
 
   constructor(private booksService: BooksService) {
   }
 
   ngOnInit(){
-    this.booksService.getBooks().subscribe(
-      (response) => {
+    this.booksService.getBooks().subscribe({
+      next: (response: Book[]) => {
         this.books = response;
-      },(error) => {
+      }, error: (error) => {
         console.log(error);
-      });
+      }
+    });
   }
 
 }
