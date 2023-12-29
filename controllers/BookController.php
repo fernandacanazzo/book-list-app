@@ -141,7 +141,7 @@ class BookController extends Controller
 
         if($books){
 
-            $response->data = json_encode(array("books"=>$books));
+            $response->data = json_encode($books);
             return $response;
 
         }else{
