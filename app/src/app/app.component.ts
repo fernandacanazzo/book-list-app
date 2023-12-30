@@ -20,11 +20,18 @@ export class AppComponent implements OnInit{
   faPenToSquare = faPenToSquare;
   faXmark = faXmark;
   modalRef: MdbModalRef<ModalComponent> | null = null;
+  textAlert: string | null = null;
 
   constructor(private booksService: BooksService, private modalService: MdbModalService) {
   }
 
   ngOnInit(){
+
+    this.loadBooks();
+
+  }
+
+  loadBooks(){
 
     this.booksService.getBooks().subscribe({
       next: (response: Book[]) => {
@@ -40,6 +47,11 @@ export class AppComponent implements OnInit{
 
     this.modalRef = this.modalService.open(ModalComponent, {
       data: { id: bookId },
+    });
+
+    this.modalRef.onClose.subscribe((response: any) => {
+      this.loadBooks();
+      this.textAlert = response.message;
     });
 
   }

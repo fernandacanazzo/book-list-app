@@ -9,24 +9,23 @@ import { BooksService } from '../services/books.service';
 export class ModalComponent {
 
   id: string | null = null;
-  deletedBook: any | null = null;
 
   constructor(private booksService: BooksService, public modalRef: MdbModalRef<ModalComponent>) {}
 
   deleteBook(bookId: any){
 
-    //this.deletedBook = this.booksService.deleteBook();
-
     this.booksService.deleteBook(bookId).subscribe({
       next: (response: any[]) => {
-       // this.deletedBook = response;
-        console.log(response);
+       
+        this.modalRef.close(response);
+
       }, error: (error) => {
-        console.log(error);
+
+        this.modalRef.close(error);
+
       }
     });
 
   }
-
 
 }
