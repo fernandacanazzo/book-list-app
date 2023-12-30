@@ -108,25 +108,41 @@ class BookController extends Controller
 
     public function actionDelete($id)
     {
-     
-        $book = Book::findOne($id);
+		
+		if(\Yii::$app->request->getMethod() == 'DELETE'){
+			
+			$id = (int)$id;
+			$bookExists = false;
+			
+			$book = Book::findOne($id);
+						
+			if($book)
+				$bookExists = true;
+			
+			$response = new Response();
+			$response->headers->set('Access-Control-Allow-Headers','content-type');
+			$response->headers->set('Access-Control-Allow-Origin','*');
+		
+			if($bookExists && $book->delete()){
+				
+				$response->data = json_encode(array("message"=>"Book was successfully deleted"));
+				return $response;
 
-        $response = new Response();
-        $response->headers->set('Access-Control-Allow-Headers','content-type');
-        $response->headers->set('Access-Control-Allow-Origin','*');
+			}elseif(!$bookExists){
 
-        if($book && $book->delete()){
+				$response->statusCode = 500;
+				$response->data = json_encode(array("message"=>"Book doesn't exist"));
+				return $response;
 
-            $response->data = json_encode(array("message"=>"Book was successfully deleted."));
-            return $response;
-
-        }else{
-
-            $response->statusCode = 500;
-            $response->data = json_encode(array("message"=>"Error on delete action"));
-            return $response;
-
-        }
+			}else{
+				
+				$response->statusCode = 500;
+				$response->data = json_encode(array("message"=>"Error on delete action"));
+				return $response;
+				
+			}
+		
+		}
 
     }
 

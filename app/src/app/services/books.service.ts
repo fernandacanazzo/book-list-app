@@ -18,4 +18,13 @@ export class BooksService {
 
   }
 
+  deleteBook(bookId: any) : Observable<any[]>{
+    
+    //let options = { params: {id: 3} };
+    return this.http.delete<any[]>(this.apiUrl + '/book/delete?id=' + bookId);
+
+    //return this.http.get<Book[]>(this.apiUrl + '/book/index');
+
+  }
+
 }
