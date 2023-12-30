@@ -135,6 +135,13 @@ class BookController extends Controller
      
         $books = Book::find()->asArray()->all();
 
+        foreach($books as $key => $book){
+
+            $date_format = date_format(date_create($book['date_insert']),"m/d/Y");
+            $books[$key]['date_insert'] = $date_format;
+
+        }
+
         $response = new Response();
         $response->headers->set('Access-Control-Allow-Headers','content-type');
         $response->headers->set('Access-Control-Allow-Origin','*');
