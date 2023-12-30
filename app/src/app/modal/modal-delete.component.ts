@@ -10,4 +10,12 @@ export class ModalComponent {
   id: string | null = null;
 
   constructor(public modalRef: MdbModalRef<ModalComponent>) {}
+
+  deleteBook(bookId: any){
+
+    console.log(bookId);
+    
+  }
+
+
 }

@@ -39,7 +39,7 @@
             <td>{{book.date_insert}}</td>
             <td class='text-center' >
               <button type="button" class="btn" title="Edit" style="font-size:x-large;margin-right:0.25em"><fa-icon [icon]="faPenToSquare" class="text-secondary"></fa-icon></button>
-              <button type="button" class="btn" title="Delete" style="font-size:x-large;margin-left:0.25em" (click)="deleteBook(book.id)"><fa-icon [icon]="faXmark" class="text-danger"></fa-icon></button>
+              <button type="button" class="btn" title="Delete" style="font-size:x-large;margin-left:0.25em" (click)="modalDeleteBook(book.id)"><fa-icon [icon]="faXmark" class="text-danger"></fa-icon></button>
             </td>
           </tr>   
         </tbody>

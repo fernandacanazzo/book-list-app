@@ -20,12 +20,12 @@ export class AppComponent implements OnInit{
   faPenToSquare = faPenToSquare;
   faXmark = faXmark;
   modalRef: MdbModalRef<ModalComponent> | null = null;
-  title: string | null = null;
 
   constructor(private booksService: BooksService, private modalService: MdbModalService) {
   }
 
   ngOnInit(){
+
     this.booksService.getBooks().subscribe({
       next: (response: Book[]) => {
         this.books = response;
@@ -33,12 +33,15 @@ export class AppComponent implements OnInit{
         console.log(error);
       }
     });
+    
   }
 
-  deleteBook(bookId: any) {
+  modalDeleteBook(bookId: any) {
+
     this.modalRef = this.modalService.open(ModalComponent, {
       data: { id: bookId },
     });
+
   }
 
 }
