@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
-import { MdbFormControlComponent } from 'mdb-angular-ui-kit/forms';
 import { BooksService } from '../services/books.service';
 
 @Component({
@@ -8,6 +7,8 @@ import { BooksService } from '../services/books.service';
   templateUrl: './modal-insert.component.html',
 })
 export class ModalInsertComponent {
+
+  inputSearch: any | null = null;
 
   constructor(private booksService: BooksService, public modalInsertRef: MdbModalRef<ModalInsertComponent>) {}
 

@@ -21,7 +21,10 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { NgFormsModule } from './ngforms.module';
+import { ModalInsertModule } from './modal/modal-insert.module';
+
 
 @NgModule({
   declarations: [
@@ -49,8 +52,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MdbTooltipModule,
     MdbValidationModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule
+    //FormsModule,
+    NgFormsModule,
+    ModalInsertModule
   ],
   providers: [],
   bootstrap: [AppComponent]
