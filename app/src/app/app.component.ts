@@ -5,6 +5,7 @@ import { BooksService } from './services/books.service';
 import { Book } from './interfaces/books.interface';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { ModalInsertComponent } from './modal/modal-insert.component';
 import { ModalComponent } from './modal/modal-delete.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
@@ -19,7 +20,9 @@ export class AppComponent implements OnInit{
   books: Book[] = [];
   faPenToSquare = faPenToSquare;
   faXmark = faXmark;
-  modalRef: MdbModalRef<ModalComponent> | null = null;
+  modalRef: MdbModalRef<any> | null = null;
+  modalInsertRef: MdbModalRef<any> | null = null;
+
   textAlert: string | null = null;
 
   constructor(private booksService: BooksService, private modalService: MdbModalService) {
@@ -52,6 +55,14 @@ export class AppComponent implements OnInit{
     this.modalRef.onClose.subscribe((response: any) => {
       this.loadBooks();
       this.textAlert = response.message;
+    });
+
+  }
+
+  modalInsertBook() {
+
+    this.modalInsertRef = this.modalService.open(ModalInsertComponent, {
+      data: { title: 'aaa' },
     });
 
   }
