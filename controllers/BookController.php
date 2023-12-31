@@ -39,7 +39,7 @@ class BookController extends Controller
         $book->author = $arrRequest['description'];
         $book->description = $arrRequest['author'];
         $book->number_of_pages = $arrRequest['number_of_pages'];
-        $book->date_insert = $arrRequest['date_insert'];
+        $book->date_insert = date("Y-m-d");
 
         $response = new Response();
         $response->headers->set('Access-Control-Allow-Headers','content-type');

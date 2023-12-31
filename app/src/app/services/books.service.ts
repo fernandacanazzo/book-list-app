@@ -25,7 +25,7 @@ export class BooksService {
 
   }
 
-  insertBook(title: string, description: string, author: string, number_of_pages: number, date_insert: string) : Observable<any[]>{ 
+  insertBook(title: string, description: string, author: string, number_of_pages: number) : Observable<any[]>{ 
 
     let headers = new HttpHeaders({
     'Content-Type': 'text/plain'});
@@ -33,10 +33,9 @@ export class BooksService {
 
     return this.http.post<any[]>(this.apiUrl + '/book/create', {
       title: title, 
-      description: "aa", 
-      author: "aa", 
-      number_of_pages: 5, 
-      date_insert: "2023-06-05"
+      description: description, 
+      author: author, 
+      number_of_pages
     }, options);
 
   }

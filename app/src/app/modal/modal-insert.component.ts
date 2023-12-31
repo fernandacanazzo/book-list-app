@@ -12,13 +12,12 @@ export class ModalInsertComponent {
   description: any;
   author: any;
   number_of_pages: any;
-  date_insert: any;
 
   constructor(private booksService: BooksService, public modalInsertRef: MdbModalRef<ModalInsertComponent>) {}
 
   insertBook(){
 
-    this.booksService.insertBook(this.title, this.description, this.author, this.number_of_pages, this.date_insert).subscribe({
+    this.booksService.insertBook(this.title, this.description, this.author, this.number_of_pages).subscribe({
       next: (response: any[]) => {
        
         this.modalInsertRef.close(response);

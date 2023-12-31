@@ -8,12 +8,26 @@
   ></button>
 </div>
 <div class="modal-body">
-
   <form searchForm="ngForm">
 
-    <div class="form-group">
-      <input type="text" class="form-control" required name="title" [(ngModel)]="title">
-      <p class="error" [hidden]="title"> This input is required</p>
+    <div class="form-group mb-3">
+      <label for="title" class="mb-2">Title</label>
+      <input type="text" id="title" class="form-control" required name="title" [(ngModel)]="title">
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="description" class="mb-2">Description</label>
+      <textarea class="form-control" id="description" rows="3" name="description" [(ngModel)]="description"></textarea>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="author" class="mb-2">Author</label>
+      <input type="text" id="author" class="form-control" required name="author" [(ngModel)]="author">
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="number_of_pages" class="mb-2">Number of pages</label>
+      <input type="number" min="1" id="number_of_pages" class="form-control" required name="number_of_pages" [(ngModel)]="number_of_pages">
     </div>
 
   </form>
