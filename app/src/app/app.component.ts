@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { BooksService } from './services/books.service';
+import { WeatherService } from './services/weather.service';
 import { Book } from './interfaces/books.interface';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +20,12 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 export class AppComponent implements OnInit{
 
   books: Book[] = [];
+  weather = {
+    city: '',
+    temperature: '',
+    condition_slug: ''
+  }
+  weatherImg: any;
   faPenToSquare = faPenToSquare;
   faXmark = faXmark;
   modalRef: MdbModalRef<any> | null = null;
@@ -27,12 +34,25 @@ export class AppComponent implements OnInit{
 
   textAlert: string | null = null;
 
-  constructor(private booksService: BooksService, private modalService: MdbModalService) {
+  constructor(private booksService: BooksService, private WeatherService: WeatherService, private modalService: MdbModalService) {
   }
 
   ngOnInit(){
 
     this.loadBooks();
+    this.getWeather();
+  }
+
+  getWeather(){
+
+    this.WeatherService.getWeather().subscribe({
+      next: (response: any) => {
+        this.weather = response;
+        this.weatherImg = "https://assets.hgbrasil.com/weather/icons/conditions/" + this.weather.condition_slug + ".svg";
+      }, error: (error) => {
+        console.log(error);
+      }
+    });
 
   }
 
