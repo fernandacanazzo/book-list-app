@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Update book</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modalUpdateRef.close()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form searchForm="ngForm">
+
+    <div class="form-group mb-3">
+      <label for="title" class="mb-2">Title</label>
+      <input type="text" id="title" class="form-control" required name="title" [(ngModel)]="book.title">
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="description" class="mb-2">Description</label>
+      <textarea class="form-control" id="description" rows="3" name="description" [(ngModel)]="book.description"></textarea>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="author" class="mb-2">Author</label>
+      <input type="text" id="author" class="form-control" required name="author" [(ngModel)]="book.author">
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="number_of_pages" class="mb-2">Number of pages</label>
+      <input type="number" min="1" id="number_of_pages" class="form-control" required name="number_of_pages" [(ngModel)]="book.number_of_pages">
+    </div>
+
+  </form>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalUpdateRef.close()">
+      Close
+    </button>
+    <button type="button" class="btn btn-primary" (click)="updateBook(book)">Update</button>
+  </div>
+
+<!---->

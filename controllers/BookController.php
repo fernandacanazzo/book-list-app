@@ -65,8 +65,10 @@ class BookController extends Controller
     public function actionUpdate($id)
     {
 
-        $request = \Yii::$app->request;        
-        $request = json_decode($request->getRawBody(), true)[0];
+        $request = \Yii::$app->request->getRawBody();
+        $request = (string)$request;
+		$arrRequest = json_decode($request, true);
+		$arrRequest["date_insert"] = date("Y-m-d");
 
         $book = Book::findOne($id);
 
@@ -76,11 +78,7 @@ class BookController extends Controller
 
         if($book){
 
-            $book->title = $request['title'];
-            $book->author = $request['author'];
-            $book->description = $request['description'];
-            $book->number_of_pages = $request['number_of_pages'];
-            $book->date_insert = $request['date_insert'];
+            $book->attributes = $arrRequest;
 
             if($book->validate()){
 

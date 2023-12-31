@@ -29,7 +29,7 @@ class Book extends ActiveRecord
     {
         return [
             [['title', 'author', 'description'], 'required'],
-            [['number_of_pages'], 'integer', 'max' => 5],
+            [['number_of_pages'], 'integer'],
             [['date_insert'], 'date', 'format' => 'php:Y-m-d'],
         ];
     }

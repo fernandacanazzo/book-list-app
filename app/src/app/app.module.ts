@@ -24,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgForm } from '@angular/forms';
 import { NgFormsModule } from './ngforms.module';
 import { ModalInsertModule } from './modal/modal-insert.module';
-
+import { ModalUpdateModule } from './modal/modal-update.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,8 @@ import { ModalInsertModule } from './modal/modal-insert.module';
     BrowserAnimationsModule,
     //FormsModule,
     NgFormsModule,
-    ModalInsertModule
+    ModalInsertModule,
+    ModalUpdateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

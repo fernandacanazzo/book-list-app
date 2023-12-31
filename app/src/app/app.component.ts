@@ -6,6 +6,7 @@ import { Book } from './interfaces/books.interface';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ModalInsertComponent } from './modal/modal-insert.component';
+import { ModalUpdateComponent } from './modal/modal-update.component';
 import { ModalComponent } from './modal/modal-delete.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit{
   faXmark = faXmark;
   modalRef: MdbModalRef<any> | null = null;
   modalInsertRef: MdbModalRef<any> | null = null;
+  modalUpdateRef: MdbModalRef<any> | null = null;
 
   textAlert: string | null = null;
 
@@ -66,6 +68,21 @@ export class AppComponent implements OnInit{
     this.modalInsertRef = this.modalService.open(ModalInsertComponent);
 
     this.modalInsertRef.onClose.subscribe((response: any) => {
+      if(response){
+        this.loadBooks();
+        this.textAlert = response.message;
+      }
+    });
+
+  }
+
+  modalUpdateBook(book: Book) {
+
+    this.modalUpdateRef = this.modalService.open(ModalUpdateComponent, {
+      data: { book: book },
+    });
+
+    this.modalUpdateRef.onClose.subscribe((response: any) => {
       if(response){
         this.loadBooks();
         this.textAlert = response.message;

@@ -35,7 +35,22 @@ export class BooksService {
       title: title, 
       description: description, 
       author: author, 
-      number_of_pages
+      number_of_pages: number_of_pages
+    }, options);
+
+  }
+
+  updateBook(book: Book) : Observable<any[]>{
+
+    let headers = new HttpHeaders({
+    'Content-Type': 'text/plain'});
+    let options = { headers: headers };
+    
+    return this.http.patch<any[]>(this.apiUrl + '/book/update?id=' + book.id, {
+      title: book.title,
+      description: book.description,
+      author: book.author,
+      number_of_pages: book.number_of_pages
     }, options);
 
   }
