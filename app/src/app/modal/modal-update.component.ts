@@ -30,7 +30,6 @@ export class ModalUpdateComponent {
       next: (response: any[]) => {
        
         this.modalUpdateRef.close(response);
-        console.log(response);
 
       }, error: (error) => {
 

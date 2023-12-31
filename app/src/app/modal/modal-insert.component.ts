@@ -21,7 +21,6 @@ export class ModalInsertComponent {
       next: (response: any[]) => {
        
         this.modalInsertRef.close(response);
-        console.log(response);
 
       }, error: (error) => {
 

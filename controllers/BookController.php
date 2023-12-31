@@ -147,7 +147,7 @@ class BookController extends Controller
     public function actionIndex()
     {
      
-        $books = Book::find()->asArray()->all();
+        $books = Book::find()->orderBy(['id' => SORT_DESC])->asArray()->all();
 
         foreach($books as $key => $book){
 
