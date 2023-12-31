@@ -4,7 +4,7 @@ protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
-config/params.php
+/config
 
 # phpstorm project files
 .idea
@@ -50,3 +50,4 @@ tests/_support/_generated
 /node_modules
 .env
 package-lock.json
+/config/params.php
