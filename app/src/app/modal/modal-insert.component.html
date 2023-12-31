@@ -10,15 +10,22 @@
 <div class="modal-body">
 
   <form searchForm="ngForm">
+
     <div class="form-group">
-  <input type="text" class="form-control" required name="search" [(ngModel)]="inputSearch">
-  <p class="error" [hidden]="inputSearch"> This input is required</p>
-</div>
-  <button type="button" class="btn btn-secondary" (click)="modalInsertRef.close()">
-    Close
-  </button>
-  <button type="button" class="btn btn-primary">Add</button>
+      <input type="text" class="form-control" required name="title" [(ngModel)]="title">
+      <p class="error" [hidden]="title"> This input is required</p>
+    </div>
 
   </form>
+
+  <!--<button type="button" class="btn btn-secondary" (click)="modalInsertRef.close()">
+    Close
+  </button>-->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalInsertRef.close()">
+      Close
+    </button>
+    <button type="button" class="btn btn-primary" (click)="insertBook()">Add</button>
+  </div>
 
 <!---->

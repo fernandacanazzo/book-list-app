@@ -31,15 +31,15 @@ class BookController extends Controller
     public function actionCreate()
     {
 
-        $request = \Yii::$app->request;
-        $request = json_decode($request->getRawBody(), true)[0];
-
+        $request = \Yii::$app->request->getRawBody();
+		$arrRequest = json_decode($request, true);
+		
         $book = new Book();
-        $book->title = $request['title'];
-        $book->author = $request['author'];
-        $book->description = $request['description'];
-        $book->number_of_pages = $request['number_of_pages'];
-        $book->date_insert = $request['date_insert'];
+        $book->title = $arrRequest['title'];
+        $book->author = $arrRequest['description'];
+        $book->description = $arrRequest['author'];
+        $book->number_of_pages = $arrRequest['number_of_pages'];
+        $book->date_insert = $arrRequest['date_insert'];
 
         $response = new Response();
         $response->headers->set('Access-Control-Allow-Headers','content-type');

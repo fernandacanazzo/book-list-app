@@ -53,16 +53,23 @@ export class AppComponent implements OnInit{
     });
 
     this.modalRef.onClose.subscribe((response: any) => {
-      this.loadBooks();
-      this.textAlert = response.message;
+      if(response){
+        this.loadBooks();
+        this.textAlert = response.message;
+      } 
     });
 
   }
 
   modalInsertBook() {
 
-    this.modalInsertRef = this.modalService.open(ModalInsertComponent, {
-      data: { title: 'aaa' },
+    this.modalInsertRef = this.modalService.open(ModalInsertComponent);
+
+    this.modalInsertRef.onClose.subscribe((response: any) => {
+      if(response){
+        this.loadBooks();
+        this.textAlert = response.message;
+      }
     });
 
   }

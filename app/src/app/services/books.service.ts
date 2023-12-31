@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Book } from '../interfaces/books.interface';
 
@@ -21,6 +22,22 @@ export class BooksService {
   deleteBook(bookId: any) : Observable<any[]>{
     
     return this.http.delete<any[]>(this.apiUrl + '/book/delete?id=' + bookId);
+
+  }
+
+  insertBook(title: string, description: string, author: string, number_of_pages: number, date_insert: string) : Observable<any[]>{ 
+
+    let headers = new HttpHeaders({
+    'Content-Type': 'text/plain'});
+    let options = { headers: headers };
+
+    return this.http.post<any[]>(this.apiUrl + '/book/create', {
+      title: title, 
+      description: "aa", 
+      author: "aa", 
+      number_of_pages: 5, 
+      date_insert: "2023-06-05"
+    }, options);
 
   }
 

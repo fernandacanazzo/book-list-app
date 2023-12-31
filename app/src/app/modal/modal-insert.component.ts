@@ -8,24 +8,29 @@ import { BooksService } from '../services/books.service';
 })
 export class ModalInsertComponent {
 
-  inputSearch: any | null = null;
+  title: any;
+  description: any;
+  author: any;
+  number_of_pages: any;
+  date_insert: any;
 
   constructor(private booksService: BooksService, public modalInsertRef: MdbModalRef<ModalInsertComponent>) {}
 
-  /*deleteBook(bookId: any){
+  insertBook(){
 
-    this.booksService.deleteBook(bookId).subscribe({
+    this.booksService.insertBook(this.title, this.description, this.author, this.number_of_pages, this.date_insert).subscribe({
       next: (response: any[]) => {
        
-        this.modalRef.close(response);
+        this.modalInsertRef.close(response);
+        console.log(response);
 
       }, error: (error) => {
 
-        this.modalRef.close(error);
+        this.modalInsertRef.close(error);
 
       }
     });
 
-  }*/
+  }
 
 }
