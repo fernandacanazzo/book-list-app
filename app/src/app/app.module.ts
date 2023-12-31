@@ -25,10 +25,14 @@ import { NgForm } from '@angular/forms';
 import { NgFormsModule } from './ngforms.module';
 import { ModalInsertModule } from './modal/modal-insert.module';
 import { ModalUpdateModule } from './modal/modal-update.module';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
