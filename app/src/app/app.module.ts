@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -27,6 +27,7 @@ import { ModalInsertModule } from './modal/modal-insert.module';
 import { ModalUpdateModule } from './modal/modal-update.module';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component'
+//import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,12 +57,17 @@ import { HomeComponent } from './pages/home/home.component'
     MdbTooltipModule,
     MdbValidationModule,
     BrowserAnimationsModule,
-    //FormsModule,
     NgFormsModule,
     ModalInsertModule,
     ModalUpdateModule
   ],
-  providers: [],
+  providers: [
+    /*{
+      provide: HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    }*/
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
