@@ -27,6 +27,21 @@ class AuthController extends Controller
 			],
 		];
 
+		// remove authentication filter
+        $auth = $behaviors['authenticator'];
+        unset($behaviors['authenticator']);
+
+        // add CORS filter
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::class,
+        ];
+        
+        // re-add authentication filter
+        $behaviors['authenticator'] = $auth;
+        // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
+        $behaviors['authenticator']['except'] = ['options'];
+        $behaviors['authenticator']['except'] = ['create'];
+
 		return $behaviors;
 
 	}
@@ -134,6 +149,8 @@ class AuthController extends Controller
 			$user = User::findByUsername($arrRequest['username']);
 
 			$response = new Response();
+			$response->headers->set('Access-Control-Allow-Headers','content-type');
+        	$response->headers->set('Access-Control-Allow-Origin','*');
 
 			if($user && password_verify($arrRequest['password'], $user->oldAttributes['password'])){
 

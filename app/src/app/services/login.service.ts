@@ -22,7 +22,7 @@ export class LoginService {
     return this.http.post<any[]>(this.apiUrl + '/auth/create', {
       username: login.username, 
       password: login.password
-    });
+    }, options);
 
   }
 
