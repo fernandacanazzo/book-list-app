@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit{
   ngOnInit(){
 
     this.loadBooks();
-    //this.getWeather();
+    this.getWeather();
   }
 
   getWeather(){

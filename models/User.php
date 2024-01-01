@@ -76,14 +76,6 @@ class User extends ActiveRecord implements IdentityInterface{
 
     }
 
-    public static function findByUsernameAndPassword($username, $password)
-    {
-        return static::find()
-            ->where(['username' => (string)$username, 'password' => (string)$password])
-            ->one();
-
-    }
-
     /**
      * {@inheritdoc}
      */

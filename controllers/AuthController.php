@@ -131,11 +131,11 @@ class AuthController extends Controller
         	$request = (string)$request;
 			$arrRequest = json_decode($request, true);
 
-			$user = User::findByUsernameAndPassword($arrRequest['username'], $arrRequest['password']);
+			$user = User::findByUsername($arrRequest['username']);
 
 			$response = new Response();
 
-			if($user){
+			if($user && password_verify($arrRequest['password'], $user->oldAttributes['password'])){
 
 				$token = $this->generateJwt($user->oldAttributes['id']);
 				$this->generateRefreshToken($user->oldAttributes['id']);
