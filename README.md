@@ -20,9 +20,9 @@ Yii2 (basic version) REST API (http://localhost:8080) + Angular 16/Bootstrap fro
 
 - GET /book/index: lista livros;
 - POST /book/create: criar um novo livro;
-- PATCH /book/update?id={id}: atualiza o usuário {id};
-- DELETE /book/delete?id={id}: deleta o usuário {id};
-- GET /weather: retorna os dados da API de clima com base na localização do usuário
+- PATCH /book/update?id={id}: atualiza o livro {id};
+- DELETE /book/delete?id={id}: deleta o livro {id};
+- GET /weather: retorna os dados da API de clima com base na localização do usuário;
 - POST /auth/create: cria um novo Bearer token e autentica usuário
 
 ##Obs:
