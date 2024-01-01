@@ -19,7 +19,7 @@ export class LoginService {
     'Content-Type': 'text/plain'});
     let options = { headers: headers };
     
-    return this.http.post<any[]>(this.apiUrl + '/login/create', {
+    return this.http.post<any[]>(this.apiUrl + '/auth/create', {
       email: login.email, 
       password: login.password
     });

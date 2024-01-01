@@ -26,6 +26,11 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'jwt' => [
+            'class' => \sizeg\jwt\Jwt::class,
+            'key' => $params['apiSecretKey'],  //typically a long random string
+            'jwtValidationData' => \app\components\JwtValidationData::class,
+        ],
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',

@@ -1,16 +1,19 @@
 <?php
 
 namespace app\models;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
-{
+class User extends ActiveRecord implements IdentityInterface{
+
+
     public $id;
     public $username;
     public $password;
     public $authKey;
     public $accessToken;
 
-    private static $users = [
+    /*private static $users = [
         '100' => [
             'id' => '100',
             'username' => 'admin',
@@ -25,7 +28,20 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'authKey' => 'test101key',
             'accessToken' => '101-token',
         ],
-    ];
+    ];*/
+
+    public static function tableName()
+    {
+        return 'user';
+    }
+
+
+    public function rules()
+    {
+        return [
+            [['id', 'username', 'password'], 'required'],
+        ];
+    }
 
 
     /**
@@ -33,21 +49,17 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return static::findOne($id);
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+    public static function findIdentityByAccessToken($token, $type = null) {
+       // dd($token);
+        return static::find()
+            ->where(['id' => (string) $token->getClaim('uid') ])
+            ->one();
     }
 
     /**
@@ -100,5 +112,14 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+    public function afterSave($isInsert, $changedOldAttributes) {
+        // Purge the user tokens when the password is changed
+        if (array_key_exists('password', $changedOldAttributes)) {
+            \app\models\UserRefreshToken::deleteAll(['urf_userID' => $this->userID]);
+        }
+
+        return parent::afterSave($isInsert, $changedOldAttributes);
     }
 }

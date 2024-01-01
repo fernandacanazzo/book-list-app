@@ -17,9 +17,9 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
  /* styleUrls: ['./app.component.css'],*/
   providers: [BooksService]
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
 
-  books: Book[] = [];
+  /*books: Book[] = [];
   weather = {
     city: '',
     temperature: '',
@@ -109,6 +109,6 @@ export class AppComponent implements OnInit{
       }
     });
 
-  }
+  }*/
 
 }

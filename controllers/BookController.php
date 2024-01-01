@@ -12,21 +12,36 @@ class BookController extends Controller
 
     public $enableCsrfValidation = false;
 
-    //user has to be authenticated
-    /*public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
+    public function behaviors() {
+
+        $behaviors = parent::behaviors();
+
+        $behaviors['authenticator'] = [
+            'class' => \sizeg\jwt\JwtHttpBearerAuth::class,
+            'except' => [
+                'login',
+                'refresh-token',
+                'options',
             ],
         ];
-    }*/
+
+        // remove authentication filter
+        $auth = $behaviors['authenticator'];
+        unset($behaviors['authenticator']);
+
+        // add CORS filter
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::class,
+        ];
+        
+        // re-add authentication filter
+        $behaviors['authenticator'] = $auth;
+        // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
+        $behaviors['authenticator']['except'] = ['options'];
+
+        return $behaviors;
+
+    }
 
     public function actionCreate()
     {
