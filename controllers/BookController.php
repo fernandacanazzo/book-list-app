@@ -182,7 +182,6 @@ class BookController extends Controller
 
         }else{
 
-            $response->statusCode = 500;
             $response->data = json_encode(array("message"=>"Book table is empty."));
             return $response;
 

@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit{
 
-  books: Book[] = [];
+  books: any;
   weather = {
     city: '',
     temperature: '',
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit{
   ngOnInit(){
 
     this.loadBooks();
-    this.getWeather();
+    //this.getWeather();
   }
 
   getWeather(){
@@ -60,8 +60,13 @@ export class HomeComponent implements OnInit{
   loadBooks(){
 
     this.booksService.getBooks().subscribe({
-      next: (response: Book[]) => {
-        this.books = response;
+      next: (response: any) => {
+
+        if(response.message)
+          this.books = null;
+        else
+          this.books = response;
+
       }, error: (error) => {
         
         this.router.navigateByUrl('/login'); 

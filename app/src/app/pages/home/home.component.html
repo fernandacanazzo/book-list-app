@@ -46,7 +46,7 @@
             <th scope="col">Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="books != null">
           <tr *ngFor="let book of books">
             <th scope="row">{{book.id}}</th>
             <td>{{book.title}}</td>
@@ -58,6 +58,11 @@
               <button type="button" class="btn" title="Edit" style="font-size:x-large;margin-right:0.25em"><fa-icon [icon]="faPenToSquare" class="text-secondary" (click)="modalUpdateBook(book)"></fa-icon></button>
               <button type="button" class="btn" title="Delete" style="font-size:x-large;margin-left:0.25em" (click)="modalDeleteBook(book.id)"><fa-icon [icon]="faXmark" class="text-danger"></fa-icon></button>
             </td>
+          </tr>   
+        </tbody>
+        <tbody *ngIf="books == null">
+          <tr>           
+            <td colspan="100%" style="text-align: center">No books</td>
           </tr>   
         </tbody>
       </table> 
