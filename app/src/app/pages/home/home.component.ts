@@ -10,6 +10,7 @@ import { ModalInsertComponent } from '../../modal/modal-insert.component';
 import { ModalUpdateComponent } from '../../modal/modal-update.component';
 import { ModalComponent } from '../../modal/modal-delete.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit{
 
   textAlert: string | null = null;
 
-  constructor(private booksService: BooksService, private WeatherService: WeatherService, private modalService: MdbModalService) {
+  constructor(private booksService: BooksService, private WeatherService: WeatherService, private modalService: MdbModalService, private router: Router) {
   }
 
   ngOnInit(){
@@ -62,7 +63,9 @@ export class HomeComponent implements OnInit{
       next: (response: Book[]) => {
         this.books = response;
       }, error: (error) => {
-        console.log(error);
+        
+        this.router.navigateByUrl('/login'); 
+
       }
     });
     
