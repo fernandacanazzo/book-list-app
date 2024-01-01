@@ -20,7 +20,7 @@ export class LoginService {
     let options = { headers: headers };
     
     return this.http.post<any[]>(this.apiUrl + '/auth/create', {
-      email: login.email, 
+      username: login.username, 
       password: login.password
     });
 

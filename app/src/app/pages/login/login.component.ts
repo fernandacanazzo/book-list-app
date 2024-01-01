@@ -12,10 +12,12 @@ export class LoginComponent {
 
   inputLogin: any = {
 
-    email: "",
+    username: "",
     password: ""
 
   };
+
+  errorMsg: any = null;
 
   constructor(private LoginService: LoginService, private router: Router) {
   }
@@ -24,11 +26,16 @@ export class LoginComponent {
 
     this.LoginService.login(login).subscribe({
       next: (response: any) => {
-        localStorage.setItem('token', response.token);
-        this.router.navigateByUrl('/'); 
+
+          localStorage.setItem('token', response.token);
+          this.router.navigateByUrl('/'); 
+
       }, error: (error) => {
-        console.log(error);
-      }
+
+        this.errorMsg = error.error.message;
+        console.log(error); 
+
+      },
     });
 
   }

@@ -125,21 +125,38 @@ class AuthController extends Controller
 
 	public function actionCreate(){
 
-		//$model = new \app\models\LoginForm();
-		//if ($model->load(Yii::$app->request->getBodyParams()) && $model->login()//) {
+		if (Yii::$app->request->getMethod() == 'POST') {
 
-			$user = User::findIdentity(1);
-			$token = $this->generateJwt($user->oldAttributes['id']);
-			//dd($token);
-			$this->generateRefreshToken($user->oldAttributes['id']);
+			$request = \Yii::$app->request->getRawBody();
+        	$request = (string)$request;
+			$arrRequest = json_decode($request, true);
 
-			return json_encode([
-				'user' => $user->oldAttributes['id'],
-				'token' => (string) $token,
-			]);
-		//} else {
-		//	return $model->getFirstErrors();
-		//}
+			$user = User::findByUsernameAndPassword($arrRequest['username'], $arrRequest['password']);
+
+			$response = new Response();
+
+			if($user){
+
+				$token = $this->generateJwt($user->oldAttributes['id']);
+				$this->generateRefreshToken($user->oldAttributes['id']);
+
+				$response->statusCode = 200;
+				$response->data = json_encode([
+					'token' => (string) $token,
+					"status"=>$response->statusCode
+				]);
+
+			}else{
+
+				$response->statusCode = 401;
+                $response->data = json_encode(array("message"=>"Authorization failed, invalid credentials", "status"=>$response->statusCode));
+
+			}
+
+			return $response;
+
+		}
+		
 	}
 
 }

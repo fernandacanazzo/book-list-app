@@ -70,13 +70,18 @@ class User extends ActiveRecord implements IdentityInterface{
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
+        return static::find()
+            ->where(['username' => (string)$username])
+            ->one();
 
-        return null;
+    }
+
+    public static function findByUsernameAndPassword($username, $password)
+    {
+        return static::find()
+            ->where(['username' => (string)$username, 'password' => (string)$password])
+            ->one();
+
     }
 
     /**
