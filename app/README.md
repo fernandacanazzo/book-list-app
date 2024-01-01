@@ -13,8 +13,9 @@ Yii2 (basic version) REST API (http://localhost:8080) + Angular 16/Bootstrap fro
 
 - Páginas:
 1. Tela inicial login (http://localhost:4200/login)
+![alt text](https://github.com/fernandacanazzo/book-list-app/blob/main/login_page.png?raw=true)
 2. CRUD livros (http://localhost:4200)
-
+![alt text](https://github.com/fernandacanazzo/book-list-app/blob/main/index_page.png?raw=true)
 ##API:
 
 GET /book/index: lista livros;
@@ -60,6 +61,7 @@ Adicionar o seguinte trecho em config/params.php com as chaves já criadas:
 ],
 
 5. Rodar as migrations antes de usar o app
+
 
 
 
