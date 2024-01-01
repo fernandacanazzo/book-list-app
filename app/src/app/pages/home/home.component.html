@@ -1,8 +1,11 @@
 <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">App</a>
-    <<span class="navbar-brand mb-0 h5" style="font-size: smaller">{{weather.city}} <img [src]="weatherImg" style="width:2vw"> {{weather.temperature}}&ordm;C </span>
-  </div> 
+    <a class="navbar-brand" href="#">App</a>  
+    <div class="d-flex flex-row-reverse bd-highlight">
+      <div class="bd-highlight"><button type="button" (click)="logout()" class="btn  btn-outline-light">Logout</button></div>
+      <div class="bd-highlight"><span class="navbar-brand mb-0 h5" style="font-size: smaller;position:relative;top:0.5em">{{weather.city}} <img [src]="weatherImg" style="width:2vw"> {{weather.temperature}}&ordm;C </span></div>      
+    </div>
+  </div>
 </nav>
 
 <main role="main" class="container-fluid mt-5">
